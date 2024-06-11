@@ -27,36 +27,6 @@ public class UserService {
     @Autowired
     private EmailService emailService;
 
-    /*public User registerUser(User user) {
-        // Save user to the database
-        User registeredUser = userRepository.save(user);
-
-        // Generate verification code
-        String verificationCode = generateVerificationCode();
-        VerificationCode code = new VerificationCode();
-        code.setEmail(user.getEmail());
-        code.setCode(verificationCode);
-        code.setExpiryDate(LocalDateTime.now().plusHours(1)); // 1 hour expiry
-        verificationCodeRepository.save(code);
-
-        // Send verification email
-        String subject = "Verify your email";
-        String text = "Your verification code is " + verificationCode;
-        emailService.sendEmail(user.getEmail(), subject, text);
-
-        return registeredUser;
-    }*/
-
-    /*public boolean verifyUser(String email, String code) {
-        Optional<VerificationCode> verificationCode = verificationCodeRepository.findByEmailAndCode(email, code);
-        if (verificationCode.isPresent() && verificationCode.get().getExpiryDate().isAfter(LocalDateTime.now())) {
-            // Verification successful
-            return true;
-        }
-        // Verification failed
-        return false;
-    }*/
-
     public User registerUser(User user) {
         User registeredUser = userRepository.save(user);
 
@@ -84,20 +54,7 @@ public class UserService {
         return String.format("%06d", random.nextInt(999999));
     }
 
-   /* public void sendResetPasswordEmail(String email) {
-        // Generate reset password code
-        String resetCode = generateVerificationCode();
-        VerificationCode code = new VerificationCode();
-        code.setEmail(email);
-        code.setCode(resetCode);
-        code.setExpiryDate(LocalDateTime.now().plusHours(1)); // 1 hour expiry
-        verificationCodeRepository.save(code);
 
-        // Send reset password email
-        String subject = "Reset your password";
-        String text = "Your password reset code is " + resetCode;
-        emailService.sendEmail(email, subject, text);
-    }*/
 
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -118,19 +75,9 @@ public class UserService {
         emailService.sendEmail(email, subject, text);
     }
 
-    public boolean resetPassword(String email, String token, String newPassword) {
-        Optional<VerificationCode> verificationCode = verificationCodeRepository.findByEmailAndCode(email, token);
-        if (verificationCode.isPresent() && verificationCode.get().getExpiryDate().isAfter(LocalDateTime.now())) {
-            Optional<User> userOptional = userRepository.findByEmail(email);
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                user.setPassword(newPassword); // Make sure to hash the password before saving
-                userRepository.save(user);
-                verificationCodeRepository.delete(verificationCode.get());
-                return true;
-            }
-        }
-        return false;
+
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
 }

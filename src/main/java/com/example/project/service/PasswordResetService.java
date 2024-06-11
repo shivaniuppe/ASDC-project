@@ -29,4 +29,7 @@ public class PasswordResetService {
                 .filter(t -> t.getExpiryDate().isAfter(LocalDateTime.now()))
                 .isPresent();
     }
+    public void deleteToken(String token) {
+        tokenRepository.findByToken(token).ifPresent(tokenRepository::delete);
+    }
 }

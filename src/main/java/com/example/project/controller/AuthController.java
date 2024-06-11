@@ -50,39 +50,6 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestBody User user) {
-        try {
-            User existingUser = userService.findByEmail(user.getEmail()).orElse(null);
-            if (existingUser == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-            }
-            // Send reset password email logic
-            userService.sendResetPasswordEmail(user.getEmail());
-            return ResponseEntity.ok("Password reset email sent");
-        } catch (Exception e) {
-            logger.error("Error resetting password: ", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error resetting password.");
-        }
-    }
-
-    @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> payload) {
-        String email = payload.get("email");
-        String token = payload.get("token");
-        String newPassword = payload.get("newPassword");
-        try {
-            if (userService.resetPassword(email, token, newPassword)) {
-                return ResponseEntity.ok("Password reset successfully");
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid token or token has expired");
-            }
-        } catch (Exception e) {
-            logger.error("Error resetting password: ", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error resetting password.");
-        }
-    }
-
    @PostMapping("/verify")
    public ResponseEntity<?> verifyEmail(@RequestBody VerificationRequest request) {
        logger.info("Received verification request: {}", request);

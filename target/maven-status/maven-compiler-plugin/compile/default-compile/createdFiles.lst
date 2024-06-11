@@ -10,6 +10,7 @@ com/example/project/DalExchangeBackendApplication.class
 com/example/project/service/UserService.class
 com/example/project/model/VerificationCode.class
 com/example/project/repository/UserRepository.class
+com/example/project/config/AppConfig.class
 com/example/project/model/VerificationRequest.class
 com/example/project/repository/VerificationCodeRepository.class
 com/example/project/repository/PasswordResetTokenRepository.class
