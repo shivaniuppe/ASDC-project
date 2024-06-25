@@ -13,6 +13,8 @@ com/example/project/repository/UserRepository.class
 com/example/project/config/AppConfig.class
 com/example/project/model/VerificationRequest.class
 com/example/project/repository/VerificationCodeRepository.class
+com/example/project/service/CustomUserDetailsService.class
 com/example/project/repository/PasswordResetTokenRepository.class
 com/example/project/controller/PasswordResetController.class
+com/example/project/config/CustomAuthenticationProvider.class
 com/example/project/config/WebConfig.class

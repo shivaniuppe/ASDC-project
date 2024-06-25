@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -20,6 +21,8 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody User user) {
@@ -27,6 +30,9 @@ public class AuthController {
             if (!user.getEmail().endsWith("@dal.ca")) {
                 return ResponseEntity.badRequest().body("Email must be a @dal.ca address");
             }
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+
             userService.registerUser(user);
             // Send verification code logic
             return ResponseEntity.ok("User registered successfully. Please check your email for verification code.");
@@ -40,10 +46,17 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
             User existingUser = userService.findByEmail(user.getEmail()).orElse(null);
-            if (existingUser == null || !existingUser.getPassword().equals(user.getPassword())) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            //String encodedPassword = passwordEncoder.encode(user.getPassword());
+            System.out.println("\n\n\n--------------------------------------------");
+            System.out.println(user.getPassword());
+            System.out.println(existingUser.getPassword());
+            System.out.println(passwordEncoder.matches(user.getPassword(), existingUser.getPassword()));
+            System.out.println("--------------------------------------------\n\n\n");
+            //user.setPassword(encodedPassword);
+            if (existingUser != null || passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+                return ResponseEntity.ok("Login successful");
             }
-            return ResponseEntity.ok("Login successful");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         } catch (Exception e) {
             logger.error("Error logging in user: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error logging in user.");
