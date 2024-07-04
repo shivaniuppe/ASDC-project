@@ -1,4 +1,4 @@
-package com.example.project.service;
+/*package com.example.project.service;
 
 import com.example.project.entity.PasswordResetToken;
 import com.example.project.repository.PasswordResetTokenRepository;
@@ -32,4 +32,4 @@ public class PasswordResetService {
     public void deleteToken(String token) {
         tokenRepository.findByToken(token).ifPresent(tokenRepository::delete);
     }
-}
+}*/

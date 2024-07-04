@@ -1,1 +1,7 @@
 /Users/shivaniuppe/Desktop/ASDC-project/src/test/java/com/example/project/EmailTest.java
+/Users/shivaniuppe/Desktop/ASDC-project/src/test/java/com/example/project/controller/AuthControllerTest.java
+/Users/shivaniuppe/Desktop/ASDC-project/src/test/java/com/example/project/controller/EmailControllerTest.java
+/Users/shivaniuppe/Desktop/ASDC-project/src/test/java/com/example/project/controller/PasswordResetControllerTest.java
+/Users/shivaniuppe/Desktop/ASDC-project/src/test/java/com/example/project/service/CustomUserDetailsServiceTest.java
+/Users/shivaniuppe/Desktop/ASDC-project/src/test/java/com/example/project/service/EmailServiceTest.java
+/Users/shivaniuppe/Desktop/ASDC-project/src/test/java/com/example/project/service/UserServiceTest.java

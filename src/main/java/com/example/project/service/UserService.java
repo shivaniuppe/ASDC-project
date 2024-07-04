@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -20,9 +19,6 @@ public class UserService {
 
     @Autowired
     private VerificationCodeRepository verificationCodeRepository;
-
-   // @Autowired
-    //private VerificationService verificationService;
 
     @Autowired
     private EmailService emailService;
@@ -52,32 +48,6 @@ public class UserService {
     private String generateVerificationCode() {
         Random random = new Random();
         return String.format("%06d", random.nextInt(999999));
-    }
-
-
-
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-    public void sendResetPasswordEmail(String email) {
-        // Generate reset password token
-        String token = UUID.randomUUID().toString();
-        VerificationCode code = new VerificationCode();
-        code.setEmail(email);
-        code.setCode(token);
-        code.setExpiryDate(LocalDateTime.now().plusHours(1)); // 1 hour expiry
-        verificationCodeRepository.save(code);
-
-        // Send reset password email
-        String subject = "Reset your password";
-        String text = "To reset your password, please click the link below:\n" +
-                "http://localhost:3000/reset-password?token=" + token + "&email=" + email;
-        emailService.sendEmail(email, subject, text);
-    }
-
-
-    public void saveUser(User user) {
-        userRepository.save(user);
     }
 
 }

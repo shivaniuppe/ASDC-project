@@ -15,6 +15,4 @@ public class VerificationCode {
     private String email;
     private String code;
     private LocalDateTime expiryDate;
-
-    // Getters and setters
 }

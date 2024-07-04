@@ -1,9 +1,9 @@
 com/example/project/controller/EmailController.class
 com/example/project/controller/AuthController.class
 com/example/project/config/SecurityConfig.class
+com/example/project/security/JwtAuthenticationFilter.class
 com/example/project/entity/PasswordResetToken.class
-com/example/project/DalExchangeBackendApplication$1.class
-com/example/project/service/PasswordResetService.class
+com/example/project/util/JwtUtils.class
 com/example/project/model/User.class
 com/example/project/service/EmailService.class
 com/example/project/DalExchangeBackendApplication.class

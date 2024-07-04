@@ -13,7 +13,9 @@
 /Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/repository/PasswordResetTokenRepository.java
 /Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/repository/UserRepository.java
 /Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/repository/VerificationCodeRepository.java
+/Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/security/JwtAuthenticationFilter.java
 /Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/service/CustomUserDetailsService.java
 /Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/service/EmailService.java
 /Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/service/PasswordResetService.java
 /Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/service/UserService.java
+/Users/shivaniuppe/Desktop/ASDC-project/src/main/java/com/example/project/util/JwtUtils.java
